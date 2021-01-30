@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile.dev
       context: ./nginx
     ports:
-        -'3050:80'
+        - "3050:80"
   postgres:
     image: "postgres:latest"
     environment:
@@ -43,5 +43,5 @@ services:
       - /app/node_modules
       - ./worker:/app
     environment:
-      REDIS_HOST=redis
-      REDIS_PORT=6379
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
