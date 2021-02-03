@@ -1,0 +1,20 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t therealjaygray/complex-app -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true USERNAME/react-test npm test -- --co
+
+after_success:
+  - docker build -t therealjaygray/multi-client ./client
+  - docker build -t therealjaygray/multi-nginx ./nginx
+  - docker build -t therealjaygray/multi-server ./server
+  - docker build -t therealjaygray/multi-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push therealjaygray/multi-client
+  - docker push therealjaygray/multi-nginx
+  - docker push therealjaygray/multi-server
+  - docker push therealjaygray/multi-worker
