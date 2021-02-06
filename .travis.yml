@@ -4,9 +4,11 @@ services:
 
 before_install:
   - docker build -t therealjaygray/complex-app -f ./client/Dockerfile.dev ./client
+# add other test scripts to run here
 
 script:
-  - docker run -e CI=true therealjaygray/complex-app npm test -- --coverage
+  - docker run therealjaygray/complex-app npm test -- --coverage
+## add more build scripts here
 
 after_success:
   - docker build -t therealjaygray/multi-client ./client
