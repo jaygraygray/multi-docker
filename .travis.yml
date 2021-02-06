@@ -7,7 +7,7 @@ before_install:
 # add other test scripts to run here
 
 script:
-  - docker run -e CI=true therealjaygray/complex-app npm run fake-test
+  - docker run -e CI=true therealjaygray/complex-app npm run yolo
 ## add more build scripts here
 
 after_success:
